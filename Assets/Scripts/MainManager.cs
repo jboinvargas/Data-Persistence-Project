@@ -8,30 +8,16 @@ public class MainManager : MonoBehaviour
 {
     public Brick BrickPrefab;
     public int LineCount = 6;
-    public Rigidbody Ball;
-    public static MainManager Instance;
+    public Rigidbody Ball;    
 
     public Text ScoreText;
+    public Text bestScoreText;
     public GameObject GameOverText;
     
     private bool m_Started = false;
     private int m_Points;
     
     private bool m_GameOver = false;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
 
     // Start is called before the first frame update
     void Start()
@@ -50,6 +36,7 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+        bestScoreText.text = $"Best Score : {DataMainManager.Instance.bestPlayerName} : {DataMainManager.Instance.bestScore}";
     }
 
     private void Update()
@@ -86,5 +73,11 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
+        if (m_Points >= DataMainManager.Instance.bestScore)
+        {
+            DataMainManager.Instance.bestScore = m_Points;
+            DataMainManager.Instance.bestPlayerName = DataMainManager.Instance.playerName;
+            bestScoreText.text = $"Best Score : {DataMainManager.Instance.bestPlayerName} : {DataMainManager.Instance.bestScore}";
+        }
     }
 }

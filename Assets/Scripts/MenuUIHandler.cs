@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class MenuUIHandler : MonoBehaviour
 {
+    public TMP_InputField playerNameInput;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -20,7 +23,13 @@ public class MenuUIHandler : MonoBehaviour
 
     public void StartNew()
     {
+        SetPlayerName();
         SceneManager.LoadScene(1);
+    }
+
+    public void SetPlayerName()
+    {
+        DataMainManager.Instance.playerName = playerNameInput.text;
     }
 
     public void Exit()
