@@ -8,11 +8,12 @@ using TMPro;
 public class MenuUIHandler : MonoBehaviour
 {
     public TMP_InputField playerNameInput;
+    public TMP_Text bestScoreText;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        bestScoreText.text = $"Best Score : {DataMainManager.Instance.bestPlayerName} : {DataMainManager.Instance.bestScore}";
     }
 
     // Update is called once per frame
@@ -39,5 +40,6 @@ public class MenuUIHandler : MonoBehaviour
 #else
         Application.Quit();
 #endif
+        DataMainManager.Instance.SaveBestPlayer();
     }
 }

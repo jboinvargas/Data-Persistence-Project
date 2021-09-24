@@ -36,6 +36,7 @@ public class MainManager : MonoBehaviour
                 brick.onDestroyed.AddListener(AddPoint);
             }
         }
+        DataMainManager.Instance.LoadBestPlayer();
         bestScoreText.text = $"Best Score : {DataMainManager.Instance.bestPlayerName} : {DataMainManager.Instance.bestScore}";
     }
 
@@ -78,6 +79,7 @@ public class MainManager : MonoBehaviour
             DataMainManager.Instance.bestScore = m_Points;
             DataMainManager.Instance.bestPlayerName = DataMainManager.Instance.playerName;
             bestScoreText.text = $"Best Score : {DataMainManager.Instance.bestPlayerName} : {DataMainManager.Instance.bestScore}";
+            DataMainManager.Instance.SaveBestPlayer();
         }
     }
 }
